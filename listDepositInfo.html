@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>List of customers</title>
+    <th:block th:replace="/customers/layout/head :: head"></th:block>
+</head>
+
+<body>
+<div class="container">
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-5">
+                <h1>List of customers</h1>
+            </div>
+            <div class="col-sm-7">
+                <a href="/customers/create" class="btn btn-outline-light">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Add New Customer</span>
+                </a>
+                <a href="/transferInfo" class="btn btn-outline-light">
+                    <i class="fa fa-history" aria-hidden="true"></i>
+                    <span>Deposit Money Information</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <table class="table table-hover table-borderless">
+            <thead>
+            <tr>
+                <th STYLE="text-align: center">#</th>
+                <th STYLE="text-align: center">Depositer Name</th>
+                <th STYLE="text-align: center">Deposit Amount</th>
+                <th STYLE="text-align: center">Created Date</th>
+            </tr>
+            </thead>
+            <tbody id="tbCustomer">
+
+            <th:block th:each="deposit : ${deposits}">
+                <tr>
+                    <td STYLE="text-align: center" th:text="${deposit.getId()}"></td>
+                    <td STYLE="text-align: center" th:text="${deposit.getDepositerName()}"></td>
+                    <td STYLE="text-align: center" th:text="${deposit.getTransactionAmount()}"></td>
+                    <td STYLE="text-align: center" th:text="${deposit.getCreatedAt()}"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+        <a href="/customers">
+            <button type="submit" class="btn btn-outline-primary">
+                Back
+            </button>
+        </a>
+    </div>
+</div>
+
+<th:block th:replace="/customers/layout/script :: script"></th:block>
+
+</body>
+</html>
