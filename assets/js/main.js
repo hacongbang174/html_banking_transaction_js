@@ -60,6 +60,7 @@ let customers = [
 ];
 
 let tbody = $('#tbCustomer tbody');
+let select = $('#recipients select')
 function renderCustomer(obj) {
     return `<tr id='tr_${obj.id}'>
             <td>${obj.id}</td>
@@ -88,6 +89,8 @@ function renderCustomer(obj) {
         </tr>`
         ;
 }
+
+
 function getAllCustomers() {
     customers.forEach((customer) => {
         let str = renderCustomer(customer);
@@ -98,8 +101,11 @@ function getAllCustomers() {
     addEventDelete();
     addEventDeposit();
     addEventWithdraw();
+    addEventTransfer();
 }
 getAllCustomers();
+
+
 
 function getCustomerById(customerId) {
     return customers.find(item => item.id == customerId);
@@ -132,6 +138,21 @@ function addEventDeposit() {
 }
 
 function addEventWithdraw() {
+    $('.withdraw').on('click', function () {
+        customerId = $(this).data('id');
+        let customer = getCustomerById(customerId);
+        if (customer) {
+            $('#fullNameWd').val(customer.fullName);
+            $('#emailWd').val(customer.email);
+            $('#phoneWd').val(customer.phone);
+            $('#addressWd').val(customer.address);
+            $('#amountWd').val();
+            $('#mdWithdraw').modal('show');
+        }
+    });
+}
+
+function addEventTransfer() {
     $('.withdraw').on('click', function () {
         customerId = $(this).data('id');
         let customer = getCustomerById(customerId);
